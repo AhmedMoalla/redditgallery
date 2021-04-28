@@ -1,0 +1,18 @@
+spring:
+  application.name: scraper
+  main.banner-mode: off
+  batch.job.enabled: false
+  cloud:
+    function.definition: startScraperJob;newPostsScraped
+    stream.bindings:
+      startScraperJob-in-0:
+        destination: start-scraper-job
+        group: start-scraper-job-group
+      newPostsScraped-out-0:
+        destination: new-posts-scraped
+        producer.required-groups: new-posts-scraped-group
+  rabbitmq:
+    username: rabbitmq
+    password: rabbitmq
+
+server.port: 8091

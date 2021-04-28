@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.5</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<packaging>pom</packaging>
+
+	<groupId>com.novencia.bltech</groupId>
+	<artifactId>redditgallery</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<modules>
+		<module>explorer</module>
+        <module>api</module>
+        <module>scraper</module>
+        <module>posts</module>
+        <module>gateway</module>
+        <module>commons</module>
+        <module>users</module>
+    </modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<java.version>11</java.version>
+
+		<gatling-charts-highcharts.version>3.5.0</gatling-charts-highcharts.version>
+		<minio.version>8.0.3</minio.version>
+		<modelmapper.version>2.3.9</modelmapper.version>
+		<keycloak.version>12.0.1</keycloak.version>
+		<spring-cloud.version>2020.0.2</spring-cloud.version>
+		<jib-maven-plugin.version>2.8.0</jib-maven-plugin.version>
+		<spring-cloud-k8s.version>2.0.2</spring-cloud-k8s.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-kubernetes-client-all</artifactId>
+				<version>${spring-cloud-k8s.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework.cloud</groupId>
+						<artifactId>spring-cloud-kubernetes-client-discovery</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.gatling.highcharts</groupId>
+			<artifactId>gatling-charts-highcharts</artifactId>
+			<version>${gatling-charts-highcharts.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Mock Server -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>mockwebserver</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Async Utilities -->
+		<dependency>
+			<groupId>org.awaitility</groupId>
+			<artifactId>awaitility</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Flux/Mono Testing -->
+		<dependency>
+			<groupId>io.projectreactor</groupId>
+			<artifactId>reactor-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Database Testing -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<version>${jib-maven-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

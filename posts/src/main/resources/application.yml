@@ -1,0 +1,30 @@
+spring:
+  application.name: posts
+  profiles.active: oauth
+  cloud:
+    function.definition: persistNewPosts
+    stream.bindings:
+      persistNewPosts-in-0:
+        destination: new-posts-scraped
+        group: new-posts-scraped-group
+  rabbitmq:
+    username: rabbitmq
+    password: rabbitmq
+  data:
+    mongodb:
+      username: mongo
+      password: mongo
+      database: redditgallery
+
+server.port: 8092
+
+reddit-gallery:
+  minio:
+    endpoint: http://localhost:9000
+    access-key: minio
+    secret-key: miniopass
+logging:
+  level:
+    com.novencia.bltech.posts.storage.impl: DEBUG
+    com.novencia.bltech.posts.listener.impl: DEBUG
+

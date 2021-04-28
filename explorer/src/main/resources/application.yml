@@ -1,0 +1,12 @@
+spring:
+  application.name: explorer
+  main.banner-mode: off
+
+# TODO IN SECRETS OR ENV VARIABLES
+reddit-client:
+  client-id: lfq1WrlB7K4tlg
+  client-secret: dPX1x5Uos6JvgSFh6mvcW1uyG8c
+  username: redditube_explore
+  password: 98578652
+
+server.port: 8090

@@ -1,0 +1,19 @@
+spring.cloud.gateway:
+  httpclient:
+    connect-timeout: 5000
+    response-timeout: 999s # TODO Find a solution for reddit api delay
+  routes:
+    - id: "Posts"
+      uri: http://localhost:8092
+      predicates:
+        - Path=/posts
+    - id: "Users"
+      uri: http://localhost:8094
+      predicates:
+        - Path=/users
+      metadata:
+        unsecure: true
+        unsecure_pattern: /users/**
+  default-filters:
+    - RemoveRequestHeader=Cookie
+    - TokenRelay
