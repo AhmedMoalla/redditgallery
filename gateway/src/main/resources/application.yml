@@ -9,14 +9,26 @@ spring:
 #      httpserver:
 #        wiretap: true
 
+management:
+  health:
+    livenessstate.enabled: true
+    readinessstate.enabled: true
+  endpoint:
+    health:
+      probes.enabled: true
+      show-details: always
+  endpoints.web.exposure.include: info,health,refresh
+
 server:
   port: 8093
 
 reddit-gallery:
   idp:
+    host: localhost
+    port: 5555
     realm: reddit-gallery
     client-id: reddit-gallery
-    client-secret: 7b335bc6-c9e4-47e9-a4f9-9899ae7037f0
+    client-secret: d9e8eb84-5062-4abd-b974-f3df79054e4e
 
 #logging.level:
 #  reactor.netty: DEBUG

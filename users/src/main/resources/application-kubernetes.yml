@@ -1,0 +1,13 @@
+spring.data.mongodb:
+  username: mongo
+  password: mongo
+  database: redditgallery
+  host: mongo
+  port: 27017
+
+server.port: 8080
+
+reddit-gallery:
+  idp:
+    host: keycloak
+    port: 8080

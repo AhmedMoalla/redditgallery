@@ -47,6 +47,7 @@ public class OAuthResourceServerConfiguration {
         if (!unsecureMatchers.isEmpty()) {
             http.authorizeExchange().matchers(unsecureMatchers.toArray(new ServerWebExchangeMatcher[0])).permitAll();
         }
+        http.authorizeExchange().pathMatchers("/actuator/**").permitAll();
         http.authorizeExchange().anyExchange().authenticated();
         http.oauth2ResourceServer().jwt()
                 .jwtAuthenticationConverter(new UsernamePrincipalJwtAuthenticationConverter());

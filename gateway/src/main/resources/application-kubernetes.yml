@@ -1,0 +1,26 @@
+server.port: 8080
+
+spring.cloud.gateway:
+  httpclient:
+    connect-timeout: 5000
+    response-timeout: 999s # TODO Find a solution for reddit api delay
+  routes:
+    - id: "Posts"
+      uri: http://posts:8080
+      predicates:
+        - Path=/posts
+    - id: "Users"
+      uri: http://users:8080
+      predicates:
+        - Path=/users
+      metadata:
+        unsecure: true
+        unsecure_pattern: /users/**
+  default-filters:
+    - RemoveRequestHeader=Cookie
+    - TokenRelay
+
+reddit-gallery:
+  idp:
+    host: keycloak
+    port: 8080

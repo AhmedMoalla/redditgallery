@@ -16,3 +16,6 @@ spring:
     password: rabbitmq
 
 server.port: 8091
+explorer:
+  host: localhost
+  port: 8090

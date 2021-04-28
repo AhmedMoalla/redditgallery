@@ -7,6 +7,16 @@ spring:
       password: mongo
       database: redditgallery
 
+management:
+  health:
+    livenessstate.enabled: true
+    readinessstate.enabled: true
+  endpoint:
+    health:
+      probes.enabled: true
+      show-details: always
+  endpoints.web.exposure.include: info,health,refresh
+
 server.port: 8094
 
 reddit-gallery:
@@ -15,4 +25,4 @@ reddit-gallery:
     port: 5555
     realm: reddit-gallery
     client-id: reddit-gallery-gateway
-    client-secret: 268507bf-e136-4eac-805f-66a99c8eebd1
+    client-secret: 7fa2c40b-9d89-429b-a172-764bdeca0d59

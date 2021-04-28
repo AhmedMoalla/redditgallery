@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+spec:
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:3
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: mongo-env
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/mongod.conf
+              subPath: mongod.conf
+            - name: config-volume
+              mountPath: /docker-entrypoint-initdb.d/create-app-user.sh
+              subPath: create-app-user.sh
+        - name: mongo-express
+          image: mongo-express
+          ports:
+            - containerPort: 8081
+          env:
+            - name: ME_CONFIG_MONGODB_ADMINUSERNAME
+              value: mongo
+            - name: ME_CONFIG_MONGODB_ADMINPASSWORD
+              value: mongo
+      volumes:
+        - name: config-volume
+          configMap:
+            name: mongo-config

@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+build:
+  artifacts:
+    - image: gateway
+      jib:
+        project: gateway
+    - image: users
+      jib:
+        project: users
+    - image: scraper
+      jib:
+        project: scraper
+    - image: posts
+      jib:
+        project: posts
+
+deploy:
+  kubectl:
+    manifests: ["**/k8s/**.yaml", "k8s/**/**.yaml"]
+
+#portForward:
+#  - resourceType: service
+#    resourceName: keycloak
+#    namespace: default
+#    port: 8080
+#    localPort: 5555

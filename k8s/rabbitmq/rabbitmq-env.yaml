@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  RABBITMQ_DEFAULT_USER: rabbitmq
+  RABBITMQ_DEFAULT_PASS: rabbitmq
+kind: ConfigMap
+metadata:
+  name: rabbitmq-env

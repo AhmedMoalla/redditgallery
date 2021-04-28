@@ -23,8 +23,8 @@ reddit-gallery:
     endpoint: http://localhost:9000
     access-key: minio
     secret-key: miniopass
-logging:
-  level:
-    com.novencia.bltech.posts.storage.impl: DEBUG
-    com.novencia.bltech.posts.listener.impl: DEBUG
+#logging:
+#  level:
+#    com.novencia.bltech.posts.storage.impl: DEBUG
+#    com.novencia.bltech.posts.listener.impl: DEBUG
 

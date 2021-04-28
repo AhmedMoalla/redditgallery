@@ -23,7 +23,7 @@ import static org.springframework.security.web.server.util.matcher.ServerWebExch
 
 @Slf4j
 @SpringBootApplication
-@EnableConfigurationProperties(IdpCredentials.class)
+@EnableConfigurationProperties(IdpProperties.class)
 public class GatewayApplication {
 
     public static void main(String[] args) {
@@ -49,20 +49,20 @@ public class GatewayApplication {
     }
 
     @Bean
-    public RouteLocator routes(RouteLocatorBuilder builder, IdpCredentials creds) {
+    public RouteLocator routes(RouteLocatorBuilder builder, IdpProperties props) {
         return builder.routes()
                 .route("token", r -> r.path("/token")
                         .filters(f ->
-                                f.prefixPath("/auth/realms/reddit-gallery/protocol/openid-connect")
-                                 .modifyRequestBody(String.class, String.class, MediaType.APPLICATION_FORM_URLENCODED_VALUE, addClientCredentials(creds)))
-                        .uri("http://localhost:5555"))
+                                f.prefixPath(String.format("/auth/realms/%s/protocol/openid-connect", props.getRealm()))
+                                 .modifyRequestBody(String.class, String.class, MediaType.APPLICATION_FORM_URLENCODED_VALUE, addClientCredentials(props)))
+                        .uri(String.format("http://%s:%d", props.getHost(), props.getPort())))
         .build();
     }
 
-    private RewriteFunction<String, String> addClientCredentials(IdpCredentials creds) {
+    private RewriteFunction<String, String> addClientCredentials(IdpProperties props) {
         return (ServerWebExchange serverWebExchange, String body) -> {
             String credentials = String.format("&client_id=%s&client_secret=%s&grant_type=%s&scope=%s",
-                    creds.getClientId(), creds.getClientSecret(), "password", "openid");
+                    props.getClientId(), props.getClientSecret(), "password", "openid");
             return Mono.just(body + credentials);
         };
     }

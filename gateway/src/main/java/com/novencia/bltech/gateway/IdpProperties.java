@@ -1,13 +1,13 @@
 package com.novencia.bltech.gateway;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Getter
-@Setter
+@Data
 @ConfigurationProperties("reddit-gallery.idp")
-public class IdpCredentials {
+public class IdpProperties {
+    private String host;
+    private int port;
     private String realm;
     private String clientId;
     private String clientSecret;

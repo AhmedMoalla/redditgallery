@@ -1,0 +1,10 @@
+spring:
+  rabbitmq:
+    username: rabbitmq
+    password: rabbitmq
+    host: rabbitmq
+
+server.port: 8080
+explorer:
+  host: explorer
+  port: 8080

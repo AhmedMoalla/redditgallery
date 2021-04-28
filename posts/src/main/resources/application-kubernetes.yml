@@ -1,0 +1,21 @@
+spring:
+  rabbitmq:
+    username: rabbitmq
+    password: rabbitmq
+    host: rabbitmq
+  data:
+    mongodb:
+      username: mongo
+      password: mongo
+      database: redditgallery
+      host: mongo
+      port: 27017
+
+server.port: 8080
+
+reddit-gallery:
+  minio:
+    endpoint: http://minio:9000
+    access-key: minio
+    secret-key: miniopass
+

@@ -1,0 +1,9 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: explorer
+spec:
+  type: ExternalName
+  externalName: host.docker.internal
+  ports:
+    - port: 8080
